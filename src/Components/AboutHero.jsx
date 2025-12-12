@@ -1,13 +1,22 @@
 // component of detailpage - Aman 
 import { useState } from "react";
-import products from "../data/products";
+  import products from "../data/products";
+import { useNavigate } from "react-router-dom";
+
 
 export function AboutHero() {
+  const navegate = useNavigate()
+  
+  const handleClick = () => {
+    navegate(`/cart/${p.id}`)
+  }
+
   const [qty, setQty] = useState(1);
 
-    const P_id = 1;
+    const P_id = 10;
     const p = products.find((item) => item.id == P_id)
     console.log(p.id)
+
 
   return (
     <div className="max-w-6xl w-full flex flex-col md:flex-row items-start gap-14 py-12">
@@ -32,8 +41,8 @@ export function AboutHero() {
         <div className="flex items-center gap-2 text-yellow-400 text-xl font-semibold">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-star-fill" viewBox="0 0 16 16">
   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-</svg> {p.rating}
-          <span className="text-gray-400 ">({p.reviewCount} reviews)</span>
+</svg> {p.star}
+          <span className="text-gray-400 ">({p.rating} reviews)</span>
         </div>
 
         <h2 className="text-4xl font-bold">₹{p.price}</h2>
@@ -60,7 +69,7 @@ export function AboutHero() {
         </div>
 
         <div className="flex gap-4 mt-3">
-          <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-xl text-white font-semibold text-lg">
+          <button onClick={handleClick} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-xl text-white font-semibold text-lg">
             Add to Cart
           </button>
 
